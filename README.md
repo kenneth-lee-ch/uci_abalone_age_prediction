@@ -9,58 +9,71 @@ In this study, we aim to resolve the traditionally tedious and time consuming ta
 To begin, we start off by investigating the distribution within each variable, continuous and categorical, respectively. As shown in ​`Figure 1​` below, 
 
 ![](/figures/figure1.png)
+
 *Figure 1: Histograms of All Continuous Variables*
 
 a few variables appear to be right-skewed, and clearly there are outliers to be removed in the variable ​height.​ We devote the next paragraph to the issue of outliers. Here, we examine some candidate transformations in order to fix the skewness in the response variable of interest, ​rings,​ the results of which are shown in ​`Figure 2​`. 
 
 ![](/figures/figure2.png)
+
 *Figure 2: Transformations of the Response Variable*
 
 Multiple transformations seem to be appropriate, so we will apply a Box-Cox procedure later to rigorously select the transformation. Then, we study the distribution of outcome variable and overall sample observations across different levels of the categorical variable, ​Sex​. We can see from ​`Figures 3 ​and ​4​` that the data is pretty evenly split across the levels of ​Sex​, and that Males and Females have similar but slightly different distributions than that of the Infants.
 
 ![](/figures/figure3.png)
+
 *Figure 3: Boxplots of Rings across Levels of Sex*
 
 ![](/figures/figure4.png)
+
 *Figure 4: Distribution of Different Levels of Sex*
 
 Next, we regress the outcome variable on all the predictor variables so we can detect the existence of any potential outliers. In addition to non-linear residuals and heteroscedasticity, `Figure 5​` also shows signs of outliers in both the outcome and the predictor dimensions. So, we apply a Cook’s Distance measure to help remove the outliers, in both outcome and predictor dimensions. 
 
 ![](/figures/figure5.png)
+
 *Figure 5: Residual Plots*
 
 Our calculation shows that a total of 105 observations are outlying at the 95% level. Since the sample size exceeds the numbers of outliers massively, these outliers are then removed from the sample. A set of new histograms are plotted and presented in ​`Figure 6​` after the removal. It is safe to conclude that no obvious outliers are present in the continuous variables.
 
 ![](/figures/figure6.png)
+
 *Figure 6: Histograms of Continuous Variables (after Removing the Outliers)*
 
 Furthermore, we proceed to decide the transformation to apply on the outcome variable, rings.​ As is implied in ​`Figure 7`, t​ he Box-Cox procedure suggests that the log-transformation is appropriate. 
 
 ![](/figures/figure7.png)
+
 *Figure 7: Box-Cox Plot*
 
 So the linear model is fitted again with the log-transformed outcome variable, and this time, the non-linearity in the residuals (indicated by ​`Figure 5​`) has reduced, error variance appears to be constant, and other model assumptions also appear to be satisfied (​`Figure 8​`).
 
 ![](/figures/figure8.png)
+
 *Figure 8: Residual Plots after Log-Transformation*
 
 `Figure 9` d​epicts that there might be some non-linear relations between the log-outcome and some predictor variables. Therefore, we have left a whole section of discussion below to showcase the second-order models. While some of the weight measures appear to be highly collinear as is seen in ​`Figure 10`,​ for our purpose of prediction, we will leave this issue to the model selection technique with the hope of it excluding the redundant variables.
 
 ![](/figures/figure9.png)
+
 *Figure 9: Pairwise Scatterplots after Log-Transformation*
 
 ![](/figures/figure10.png)
+
 *Figure 10: Correlation Matrix*
 
 Lastly, to further simplify the candidate features, we split all variables by the levels of Sex​ and plot relevant graphs presented in ​`Figuers 11​ to ​13`.​ Consequently, we have found strong signal that Males and Females can be combined into one, as one can hardly distinguish them from their mixture. Therefore, we aggregate them to be Adults, and are left with two levels, Adults & Infants, for this categorical variable.
 
 ![](/figures/figure11.png)
+
 *Figure 11: Boxplot of Log(Rings) across Levels of Sex*
 
 ![](/figures/figure12.png)
+
 *Figure 12: Pairwise Scatterplots after Log-Transformation (yellow: infant; red: male; green: female)*
 
 ![](/figures/figure13.png)
+
 *Figure 13: Boxplots of variables of different genders*
 
 ### Model Selection: First-Order Additive Model
@@ -68,9 +81,11 @@ Lastly, to further simplify the candidate features, we split all variables by th
 Prior to performing the model selection in `R`, we first split the processed sample data into a training set (80% of the observations) and a validation set (20%). We then use the validation set to validate our model that is built on training data. This step is then followed by the comparison of variables between the two sets. As is displayed in ​`Figures 14​ and ​15​`, the two sets are highly comparable in all variables.
 
 ![](/figures/figure14.png)
+
 *Figure 14: Comparison between Training and Validation Sets*
 
 ![](/figures/figure15.png)
+
 *Figure 15: Maturity Distribution in Training and Validation Sets*
 
 We implement the Stepwise Model Selection Procedures in `R` in all three ways, i.e. forward selection, backward elimination, and forward stepwise. The full model includes all the variables in their original forms; whereas the null model is ​log(rings)​ regressed on a vector of 1’s. Since our goal is to make prediction, AIC is naturally the choice of model selection criterion. As a result, all 3 directions point to the same model as expressed below:
