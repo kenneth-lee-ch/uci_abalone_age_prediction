@@ -141,17 +141,19 @@ Lastly, in order to holistically characterize and therefore best predict the age
 [Abalone Data Set](https://archive.ics.uci.edu/ml/datasets/Abalone)
 
 
-## Authors
+## Authors and Contribution
 
-Kenneth Lee ([@kenneth-lee-ch](https://github.com/kenneth-lee-ch))
+Kenneth Lee ([@kenneth-lee-ch](https://github.com/kenneth-lee-ch)): exploratory data analysis and processing
+, model selection: first-order additive model
 
-Miao Hu 
+Miao Hu: model selection: predictive model for in-shell content
 
-Roger Zhou.
+Roger Zhou: model selection: second-order polynomial model with interaction terms
 
 ## Reference
 Warwick J Nash, Tracy L Sellers, Simon R Talbot, Andrew J Cawthorn and Wes B Ford (1994) "The Population Biology of Abalone (Haliotis species) in Tasmania. I. Blacklip Abalone (H. rubra) from the North Coast and Islands of Bass Strait", Sea Fisheries Division, Technical Report No. 48 (ISSN 1034-3288)
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
+
 If you do find this script useful, a link back to this repository would be appreciated. Thanks!
